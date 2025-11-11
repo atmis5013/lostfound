@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Items List{% endblock %}
+
+{% block body %}
+  <div class="container mt-4">
+    <h1>All Items</h1>
+
+    {% for message in app.flashes('success') %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% if items %}
+      <ul class="list-group">
+        {% for item in items %}
+          <li class="list-group-item">
+            <strong>{{ item.title }}</strong> — {{ item.status }}
+            <br>
+            <small>{{ item.description }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No items found yet.</p>
+    {% endif %}
+
+    <a href="{{ path('item_new') }}" class="btn btn-primary mt-3">Add New Item</a>
+  </div>
+{% endblock %}
