@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Browse Items{% endblock %}
+
+{% block body %}
+    <h1>Browse Lost & Found Items</h1>
+
+    <ul>
+        {% for item in items %}
+            <li>
+                <strong>{{ item.title }}</strong><br>
+                Status: {{ item.status }}<br>
+                Posted: {{ item.createdAt|date('Y-m-d H:i') }}<br>
+                <hr>
+            </li>
+        {% else %}
+            <p>No items found.</p>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

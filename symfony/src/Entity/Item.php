@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ItemRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
 class Item
@@ -25,6 +26,12 @@ class Item
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'items')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $owner = null;
+
+
 
     public function getId(): ?int
     {
@@ -78,4 +85,16 @@ class Item
 
         return $this;
     }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+       $this->owner = $owner;
+       return $this;
+    }
+
 }

@@ -16,6 +16,10 @@ class ItemWebController extends AbstractController
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $item = new Item();
+
+        // Set the currently logged-in user as owner
+        $item->setOwner($this->getUser());
+
         $form = $this->createForm(ItemType::class, $item);
 
         $form->handleRequest($request);
@@ -25,6 +29,7 @@ class ItemWebController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Item added successfully!');
+           
             return $this->redirectToRoute('item_list');
         }
 
@@ -36,10 +41,25 @@ class ItemWebController extends AbstractController
     #[Route('/items/list', name: 'item_list')]
     public function list(EntityManagerInterface $em): Response
     {
-        $items = $em->getRepository(Item::class)->findAll();
+         $items = $em->getRepository(Item::class)->findBy([
+            'owner' => $this->getUser()
+        ]);
 
         return $this->render('item/list.html.twig', [
             'items' => $items,
         ]);
     }
+
+
+    #[Route('/items/browse', name: 'item_browse')]
+    public function browse(EntityManagerInterface $em): Response
+    {
+          // Show all items regardless of owner
+        $items = $em->getRepository(Item::class)->findBy([], ['createdAt' => 'DESC']);
+
+        return $this->render('item/browse.html.twig', [
+             'items' => $items,
+    ]);
+    }
+
 }
