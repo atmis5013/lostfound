@@ -61,5 +61,21 @@ class ItemWebController extends AbstractController
              'items' => $items,
     ]);
     }
+    
+
+    #[Route('/items/show/dummy', name: 'item_show_dummy')]
+    public function showDummy(): Response
+    {
+        $item = new Item();
+        $item->setTitle('Dummy Item Title');
+        $item->setDescription('This is an example description used while designing the template.');
+        $item->setStatus('Draft');
+        $item->setCreatedAt(new \DateTimeImmutable());
+
+        return $this->render('item/show.html.twig', [
+            'item' => $item,
+        ]);
+    }
+
 
 }

@@ -1,19 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
+
+{% block page_title %}
+	<span class="fw-semibold">{{ block('title') }}</span>
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+	<div class="auth-container">
+		<div class="auth-card">
 
-    {{ form_errors(registrationForm) }}
+			<h2 class="auth-title">Create Your Account</h2>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+			{{ form_start(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+			<label for="{{ registrationForm.email.vars.id }}">Email</label>
+			{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Enter your email'}}) }}
+			{{ form_errors(registrationForm.email) }}
+
+			<label for="{{ registrationForm.plainPassword.vars.id }}">Password</label>
+			{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Enter your password'}}) }}
+			{{ form_errors(registrationForm.plainPassword) }}
+
+			<div class="mb-3 d-flex align-items-center">
+				{{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'me-2', 'style': 'width:auto;height:auto;'}}) }}
+				{{ form_label(registrationForm.agreeTerms, '', {'label_attr': {'class': 'm-0'}}) }}
+				{{ form_errors(registrationForm.agreeTerms) }}
+			</div>
+
+			<button type="submit" class="auth-btn mt-3">Register</button>
+
+			{{ form_end(registrationForm) }}
+
+			<div class="auth-alt mt-3">
+				Already have an account?
+				<a href="{{ path('app_login') }}">Login here</a>
+			</div>
+
+		</div>
+	</div>
 {% endblock %}
+

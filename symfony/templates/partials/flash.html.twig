@@ -1,0 +1,9 @@
+{% for type, messages in app.flashes %}
+	{% for message in messages %}
+		{% set bs = (type == 'success') ? 'success' : (type == 'error' ? 'danger' : type) %}
+		<div class="alert alert-{{ bs }} alert-custom" role="alert">
+			{{ message }}
+		</div>
+	{% endfor %}
+{% endfor %}
+

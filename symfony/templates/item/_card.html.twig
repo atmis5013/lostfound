@@ -1,0 +1,35 @@
+<div class="item-card mb-4">
+
+	<h3>{{ item.title }}</h3>
+
+	<div class="item-card-meta">
+		<strong>{{ item.status|title }}</strong>
+		<br>
+		<small>{{ item.createdAt ? item.createdAt|date('Y-m-d') : '' }}</small>
+	</div>
+
+	<p>
+		{{ item.description|length > 160 
+            ? item.description|slice(0, 160) ~ '…' 
+            : item.description 
+        }}
+	</p>
+
+	<div class="item-card-footer">
+              <a href="{{ path('item_show_dummy', {'id': item.id}) }}" class="btn btn-primary btn-sm">
+
+			View
+		</a>
+
+		{% if app.user and item.owner == app.user %}
+              <a href="{{ path('item_show_dummy', {'id': item.id}) }}" class="btn btn-secondary btn-sm">
+				Edit
+			  </a>
+
+              <a href="{{ path('item_show_dummy', {'id': item.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Delete this item?');">
+				Delete
+			  </a>
+		{% endif %}
+	</div>
+</div>
+

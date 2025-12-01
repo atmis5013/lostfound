@@ -1,16 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Add New Item{% endblock %}
+{% block title %}New Item
+{% endblock %}
+{% block page_title %}
+	<span class="fw-semibold">{{ block('title') }}</span>
+{% endblock %}
 
 {% block body %}
-  <div class="container mt-4">
-    <h1>Add a Lost or Found Item</h1>
 
-    {{ form_start(form) }}
-      {{ form_widget(form) }}
-      <button class="btn btn-primary mt-3">Save</button>
-    {{ form_end(form) }}
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-lg-6">
+			<div class="app-card">
 
-    <a href="{{ path('item_list') }}" class="btn btn-link mt-3">View All Items</a>
-  </div>
+				<h4 class="mb-4">Add a New Item</h4>
+
+				{{ form_start(form) }}
+
+				<div class="mb-3">
+					{{ form_label(form.title) }}
+					{{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+					{{ form_errors(form.title) }}
+				</div>
+
+				<div class="mb-3">
+					{{ form_label(form.description) }}
+					{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+					{{ form_errors(form.description) }}
+				</div>
+
+				<div class="mb-3">
+					{{ form_label(form.status) }}
+					{{ form_widget(form.status, {'attr': {'class': 'form-select'}}) }}
+					{{ form_errors(form.status) }}
+				</div>
+
+				<button type="submit" class="btn btn-primary w-100 mt-3">
+					Save Item
+				</button>
+
+				{{ form_end(form) }}
+
+			</div>
+		</div>
+	</div>
+
 {% endblock %}
+

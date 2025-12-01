@@ -15,7 +15,6 @@ class ItemType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('status')
-            ->add('createdAt')
         ;
     }
 

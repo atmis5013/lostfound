@@ -1,0 +1,277 @@
+/* ============================================
+   COLOR PALETTE — HAPPYHUES PALETTE #10
+   ============================================ */
+:root {
+    --color-bg: #ABD1C6;           /* Page background */
+    --color-text: #001E1D; /* Main text / headlines */
+    --color-text-light:var(--color-bg) ;    
+    --color-text-muted: #0F3433;   /* Subheadline / muted text */
+
+    --color-card-bg: #004643;      /* Card background */
+    --color-card-heading: #FFFFFE; /* Card titles */
+    --color-card-text: #ABD1C6;    /* Card body text */
+
+    --color-main: #E8E4E6;         /* Neutral surfaces */
+    --color-accent: #F9BC60;       /* Highlight / accent */
+    --color-secondary: #ABD1C6;    /* Soft secondary */
+    --color-tertiary: #E16162;     /* Additional accent */
+
+    --color-border: #0F3433;       /* borders that match the theme */
+
+    --radius: 10px;
+    --container-max: 1100px;
+
+    --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* ============================================
+   GLOBAL
+   ============================================ */
+html, body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    line-height: 1.45;
+}
+
+/* Container */
+.app-container {
+    max-width: var(--container-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+.site-navbar {
+    border-bottom: 2px solid var(--color-border);
+    background: var(--color-card-bg);
+}
+
+.app-nav {
+    background-color: var(--color-card-bg);
+    padding: 14px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.app-nav .navbar-brand {
+    color: var(--color-accent) !important;
+    font-weight: 700;
+}
+
+.app-nav .nav-link {
+    color: var(--color-main) !important;
+    margin-right: 12px;
+    font-size: 0.95rem;
+}
+
+.app-nav .nav-link.active {
+    color: var(--color-accent) !important;
+    font-weight: 600;
+}
+
+.app-nav .btn-light {
+    background-color: var(--color-main);
+    color: var(--color-text);
+    font-weight: 500;
+    border-radius: var(--radius);
+}
+
+.app-nav .btn-secondary {
+    background-color: var(--color-tertiary);
+    border: none;
+    color: white;
+    border-radius: var(--radius);
+}
+
+/* ============================================
+  ITEM CARDS
+   ============================================ */
+.item-card {
+    background: var(--color-card-bg);
+    color: var(--color-card-text);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.20);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Title */
+.item-card h3 {
+    color: var(--color-card-heading);
+    font-size: 1.25rem;
+    margin-bottom: .75rem;
+}
+
+/* Category & date row */
+.item-card-meta {
+    font-size: .9rem;
+    color: var(--color-text-light);
+    margin-bottom: .75rem;
+}
+
+/* Description */
+.item-card p {
+    color: var(--color-card-text);
+    opacity: 0.9;
+    margin-bottom: 1rem;
+    line-height: 1.45;
+}
+
+/* Footer buttons */
+.item-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: .5rem;
+    margin-top: auto;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+form label {
+    font-weight: 600;
+    margin-bottom: .25rem;
+    color: var(--color-text);
+}
+
+form .form-control,
+form .form-select {
+    border-radius: var(--radius);
+    padding: .55rem .75rem;
+    background: var(--color-main);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+form .form-control:focus,
+form .form-select:focus {
+    outline: 2px solid var(--color-accent);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-primary {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius);
+}
+
+.btn-primary:hover {
+    filter: brightness(0.92);
+}
+
+.btn-danger {
+    background: var(--color-tertiary);
+    border-color: var(--color-tertiary);
+}
+
+.btn-secondary {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary);
+    color: var(--color-text);
+}
+
+/* ============================================
+   FLASH MESSAGES
+   ============================================ */
+.alert-custom {
+    border-radius: var(--radius);
+    padding: .75rem 1rem;
+    margin-bottom: 1rem;
+    background: var(--color-main);
+    border-left: 6px solid var(--color-accent);
+    color: var(--color-text);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.mt-6 { margin-top: 1.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.text-muted { color: var(--color-text-muted); }
+.small { font-size: .9rem; }
+
+/* ---- Auth Pages ---- */
+
+.auth-container {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    background: var(--color-card-bg);
+    padding: 2rem;
+    border-radius: 18px;
+    width: 380px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.22);
+}
+
+.auth-title {
+    color: var(--color-text-heading);
+    margin-bottom: 1.3rem;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.auth-card label {
+    color: var(--color-text-subheading);
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+.auth-card input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 5px;
+    border-radius: 12px;
+    border: 1px solid var(--color-main);
+    background: #e8e4e6;
+}
+
+.auth-btn {
+    margin-top: 1.5rem;
+    width: 100%;
+    background: var(--color-accent);
+    border: none;
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-weight: 700;
+    color: #001e1d;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.auth-btn:hover {
+    background: #f8ae3b;
+}
+
+.auth-alt {
+    margin-top: 1.3rem;
+    text-align: center;
+    color: var(--color-text-subheading);
+}
+
+.auth-alt a {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.auth-error {
+    background: #e16162;
+    color: white;
+    padding: 0.7rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    text-align: center;
+}

@@ -1,21 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Browse Items{% endblock %}
+{% block page_title %}
+	<span class="fw-semibold">{{ block('title') }}</span>
+{% endblock %}
+
+{% block title %}Browse Lost & Found Items
+{% endblock %}
+
+
 
 {% block body %}
-    <h1>Browse Lost & Found Items</h1>
 
-    <ul>
-        {% for item in items %}
-            <li>
-                <strong>{{ item.title }}</strong><br>
-                Status: {{ item.status }}<br>
-                Posted: {{ item.createdAt|date('Y-m-d H:i') }}<br>
-                <hr>
-            </li>
-        {% else %}
-            <p>No items found.</p>
-        {% endfor %}
-    </ul>
+	<div class="row g-4">
+		{% for item in items %}
+			<div class="col-md-6 col-lg-4">
+				{% include 'item/_card.html.twig' with { item: item } %}
+			</div>
+		{% else %}
+			<p>No items found.</p>
+		{% endfor %}
+	</div>
 
 {% endblock %}
+
