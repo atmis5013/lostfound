@@ -13,7 +13,7 @@
 
     --color-main: #E8E4E6;         /* Neutral surfaces */
     --color-accent: #F9BC60;       /* Highlight / accent */
-    --color-secondary: #ABD1C6;    /* Soft secondary */
+    --color-secondary: #1987548c;    /* Soft secondary */
     --color-tertiary: #E16162;     /* Additional accent */
 
     --color-border: #0F3433;       /* borders that match the theme */
@@ -177,7 +177,7 @@ form .form-select:focus {
 .btn-secondary {
     background: var(--color-secondary);
     border-color: var(--color-secondary);
-    color: var(--color-text);
+   /* color: var(--color-text);*/
 }
 
 /* ============================================

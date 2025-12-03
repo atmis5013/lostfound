@@ -39,17 +39,21 @@
 						Back
 					</a>
 
+				{% if app.user and app.user == item.owner %}
 					<div>
-                    {#
-						<a href="{{ path('item_edit', {'id': item.id}) }}" class="btn btn-primary me-2">
+						<a href="{{ path('item_edit', {'id': item.id}) }}" class="btn btn-secondary me-2">
 							Edit
 						</a>
 
-						<a href="{{ path('item_delete', {'id': item.id}) }}" class="btn btn-danger" onclick="return confirm('Are you sure?');">
-							Delete
-						</a> 
-                        #}
+						<form method="post" action="{{ path('item_delete', {'id': item.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure?');">
+
+							<input type="hidden" name="_token" value="{{ csrf_token('delete_item_' ~ item.id) }}">
+
+							<button class="btn btn-danger">Delete</button>
+						</form>
 					</div>
+				{% endif %}
+
 
 				</div>
 

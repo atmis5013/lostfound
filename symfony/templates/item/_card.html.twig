@@ -16,20 +16,27 @@
 	</p>
 
 	<div class="item-card-footer">
-              <a href="{{ path('item_show_dummy', {'id': item.id}) }}" class="btn btn-primary btn-sm">
+<a href="{{ path('item_show', {'id': item.id}) }}" class="btn btn-primary me-2">
+
 
 			View
 		</a>
 
-		{% if app.user and item.owner == app.user %}
-              <a href="{{ path('item_show_dummy', {'id': item.id}) }}" class="btn btn-secondary btn-sm">
+	{% if app.user and app.user == item.owner %}
+		
+			<a href="{{ path('item_edit', {'id': item.id}) }}" class="btn btn-secondary me-2">
 				Edit
-			  </a>
+			</a>
 
-              <a href="{{ path('item_show_dummy', {'id': item.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Delete this item?');">
-				Delete
-			  </a>
-		{% endif %}
+			<form method="post" action="{{ path('item_delete', {'id': item.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure?');">
+
+				<input type="hidden" name="_token" value="{{ csrf_token('delete_item_' ~ item.id) }}">
+
+				<button class="btn btn-danger">Delete</button>
+			</form>
+		
+	{% endif %}
+
 	</div>
 </div>
 
