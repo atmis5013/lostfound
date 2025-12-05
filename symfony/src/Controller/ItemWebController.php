@@ -9,11 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ItemWebController extends AbstractController
 {
     #[Route('/items/new', name: 'item_new')]
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function new(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $item = new Item();
         $item->setOwner($this->getUser());
@@ -23,6 +25,27 @@ class ItemWebController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $item->setCreatedAt(new \DateTimeImmutable());
+            
+                // Handle image upload
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('items_images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // handle exception
+                    echo $e->getMessage();
+                }
+
+                $item->setImage($newFilename);
+            }
+            
             $em->persist($item);
             $em->flush();
 
@@ -71,7 +94,7 @@ class ItemWebController extends AbstractController
     }
 
     #[Route('/items/{id}/edit', name: 'item_edit')]
-    public function edit(int $id, Request $request, EntityManagerInterface $em): Response
+    public function edit(int $id, Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $item = $em->getRepository(Item::class)->find($id);
         if (!$item) {
@@ -86,6 +109,25 @@ class ItemWebController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+                       // Handle image upload
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('items_images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // handle exception
+                    echo $e->getMessage();
+                }
+
+                $item->setImage($newFilename);
+            }
             $em->flush();
             $this->addFlash('success', 'Item updated successfully');
             return $this->redirectToRoute('item_show', ['id' => $item->getId()]);

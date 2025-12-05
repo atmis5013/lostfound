@@ -30,7 +30,9 @@ class Item
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
-
+    
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
 
     public function getId(): ?int
@@ -95,6 +97,18 @@ class Item
     {
        $this->owner = $owner;
        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
     }
 
 }
